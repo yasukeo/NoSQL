@@ -197,10 +197,20 @@ export default function MyBookingsPage() {
 
   if (!user) return null;
 
-  // Séparer les réservations par statut
-  const activeBookings = bookings.filter(b => b.status === 'Confirmed' || b.status === 'Pending');
-  const pastBookings = bookings.filter(b => b.status === 'Cancelled' || 
-    (getFlightInfo(b.flno) && new Date(`${getFlightInfo(b.flno)!.departure_date}T${getFlightInfo(b.flno)!.departure_time}`) < new Date())
+  // Fonction pour vérifier si un vol est passé
+  const isFlightPast = (booking: Booking) => {
+    const flight = getFlightInfo(booking.flno);
+    if (!flight) return false;
+    const flightDateTime = new Date(`${flight.departure_date}T${flight.departure_time}`);
+    return flightDateTime < new Date();
+  };
+
+  // Séparer les réservations par statut (sans duplication)
+  const activeBookings = bookings.filter(b => 
+    (b.status === 'Confirmed' || b.status === 'Pending') && !isFlightPast(b)
+  );
+  const pastBookings = bookings.filter(b => 
+    b.status === 'Cancelled' || isFlightPast(b)
   );
 
   return (

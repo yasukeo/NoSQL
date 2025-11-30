@@ -185,9 +185,16 @@ function MyBookingsPage() {
         }, this);
     }
     if (!user) return null;
-    // Séparer les réservations par statut
-    const activeBookings = bookings.filter((b)=>b.status === 'Confirmed' || b.status === 'Pending');
-    const pastBookings = bookings.filter((b)=>b.status === 'Cancelled' || getFlightInfo(b.flno) && new Date(`${getFlightInfo(b.flno).departure_date}T${getFlightInfo(b.flno).departure_time}`) < new Date());
+    // Fonction pour vérifier si un vol est passé
+    const isFlightPast = (booking)=>{
+        const flight = getFlightInfo(booking.flno);
+        if (!flight) return false;
+        const flightDateTime = new Date(`${flight.departure_date}T${flight.departure_time}`);
+        return flightDateTime < new Date();
+    };
+    // Séparer les réservations par statut (sans duplication)
+    const activeBookings = bookings.filter((b)=>(b.status === 'Confirmed' || b.status === 'Pending') && !isFlightPast(b));
+    const pastBookings = bookings.filter((b)=>b.status === 'Cancelled' || isFlightPast(b));
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500",
         children: [
@@ -202,7 +209,7 @@ function MyBookingsPage() {
                             children: "✈️ SkyFlight Airlines"
                         }, void 0, false, {
                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                            lineNumber: 211,
+                            lineNumber: 221,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -214,7 +221,7 @@ function MyBookingsPage() {
                                     children: "Réserver un vol"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                    lineNumber: 213,
+                                    lineNumber: 223,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -223,7 +230,7 @@ function MyBookingsPage() {
                                     children: "Mes réservations"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                    lineNumber: 216,
+                                    lineNumber: 226,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -234,7 +241,7 @@ function MyBookingsPage() {
                                             children: user.name
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                            lineNumber: 220,
+                                            lineNumber: 230,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -243,30 +250,30 @@ function MyBookingsPage() {
                                             children: "Déconnexion"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                            lineNumber: 221,
+                                            lineNumber: 231,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                    lineNumber: 219,
+                                    lineNumber: 229,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                            lineNumber: 212,
+                            lineNumber: 222,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                    lineNumber: 210,
+                    lineNumber: 220,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                lineNumber: 209,
+                lineNumber: 219,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -277,7 +284,7 @@ function MyBookingsPage() {
                         children: "📋 Mes Réservations"
                     }, void 0, false, {
                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                        lineNumber: 233,
+                        lineNumber: 243,
                         columnNumber: 9
                     }, this),
                     bookings.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -288,7 +295,7 @@ function MyBookingsPage() {
                                 children: "🎫"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                lineNumber: 237,
+                                lineNumber: 247,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -296,7 +303,7 @@ function MyBookingsPage() {
                                 children: "Aucune réservation"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                lineNumber: 238,
+                                lineNumber: 248,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -304,7 +311,7 @@ function MyBookingsPage() {
                                 children: "Vous n'avez pas encore effectué de réservation."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                lineNumber: 239,
+                                lineNumber: 249,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -313,13 +320,13 @@ function MyBookingsPage() {
                                 children: "✈️ Réserver un vol"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                lineNumber: 240,
+                                lineNumber: 250,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                        lineNumber: 236,
+                        lineNumber: 246,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "space-y-8",
@@ -335,7 +342,7 @@ function MyBookingsPage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                        lineNumber: 252,
+                                        lineNumber: 262,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -359,7 +366,7 @@ function MyBookingsPage() {
                                                                             children: booking.status === 'Confirmed' ? '✓ Confirmée' : '⏳ En attente'
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 264,
+                                                                            lineNumber: 274,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -370,13 +377,13 @@ function MyBookingsPage() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 271,
+                                                                            lineNumber: 281,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 263,
+                                                                    lineNumber: 273,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 timeUntil && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -387,13 +394,13 @@ function MyBookingsPage() {
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 276,
+                                                                    lineNumber: 286,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                            lineNumber: 262,
+                                                            lineNumber: 272,
                                                             columnNumber: 27
                                                         }, this),
                                                         flight && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -410,7 +417,7 @@ function MyBookingsPage() {
                                                                                     children: flight.flno
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 286,
+                                                                                    lineNumber: 296,
                                                                                     columnNumber: 35
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -418,13 +425,13 @@ function MyBookingsPage() {
                                                                                     children: flight.departure_date
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 289,
+                                                                                    lineNumber: 299,
                                                                                     columnNumber: 35
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 285,
+                                                                            lineNumber: 295,
                                                                             columnNumber: 33
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -438,7 +445,7 @@ function MyBookingsPage() {
                                                                                             children: flight.departure_time
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                            lineNumber: 293,
+                                                                                            lineNumber: 303,
                                                                                             columnNumber: 37
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -446,13 +453,13 @@ function MyBookingsPage() {
                                                                                             children: flight.origin
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                            lineNumber: 294,
+                                                                                            lineNumber: 304,
                                                                                             columnNumber: 37
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 292,
+                                                                                    lineNumber: 302,
                                                                                     columnNumber: 35
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -462,7 +469,7 @@ function MyBookingsPage() {
                                                                                             className: "flex-1 border-t-2 border-dashed border-gray-300"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                            lineNumber: 297,
+                                                                                            lineNumber: 307,
                                                                                             columnNumber: 37
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -470,20 +477,20 @@ function MyBookingsPage() {
                                                                                             children: "✈️"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                            lineNumber: 298,
+                                                                                            lineNumber: 308,
                                                                                             columnNumber: 37
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                             className: "flex-1 border-t-2 border-dashed border-gray-300"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                            lineNumber: 299,
+                                                                                            lineNumber: 309,
                                                                                             columnNumber: 37
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 296,
+                                                                                    lineNumber: 306,
                                                                                     columnNumber: 35
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -494,7 +501,7 @@ function MyBookingsPage() {
                                                                                             children: flight.arrival_time
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                            lineNumber: 302,
+                                                                                            lineNumber: 312,
                                                                                             columnNumber: 37
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -502,25 +509,25 @@ function MyBookingsPage() {
                                                                                             children: flight.destination
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                            lineNumber: 303,
+                                                                                            lineNumber: 313,
                                                                                             columnNumber: 37
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 301,
+                                                                                    lineNumber: 311,
                                                                                     columnNumber: 35
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 291,
+                                                                            lineNumber: 301,
                                                                             columnNumber: 33
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 284,
+                                                                    lineNumber: 294,
                                                                     columnNumber: 31
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -535,13 +542,13 @@ function MyBookingsPage() {
                                                                                     children: booking.seat_number
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 310,
+                                                                                    lineNumber: 320,
                                                                                     columnNumber: 42
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 309,
+                                                                            lineNumber: 319,
                                                                             columnNumber: 33
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -553,13 +560,13 @@ function MyBookingsPage() {
                                                                                     children: booking.class
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 313,
+                                                                                    lineNumber: 323,
                                                                                     columnNumber: 43
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 312,
+                                                                            lineNumber: 322,
                                                                             columnNumber: 33
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -570,19 +577,19 @@ function MyBookingsPage() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 315,
+                                                                            lineNumber: 325,
                                                                             columnNumber: 33
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 308,
+                                                                    lineNumber: 318,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                            lineNumber: 283,
+                                                            lineNumber: 293,
                                                             columnNumber: 29
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -596,7 +603,7 @@ function MyBookingsPage() {
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 323,
+                                                                    lineNumber: 333,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 canCancelBooking ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -606,43 +613,43 @@ function MyBookingsPage() {
                                                                     children: cancellingId === booking.bid ? 'Annulation...' : '✕ Annuler la réservation'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 327,
+                                                                    lineNumber: 337,
                                                                     columnNumber: 31
                                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                     className: "text-sm text-gray-400 italic",
                                                                     children: "Annulation impossible (moins de 24h)"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 335,
+                                                                    lineNumber: 345,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                            lineNumber: 322,
+                                                            lineNumber: 332,
                                                             columnNumber: 27
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                    lineNumber: 261,
+                                                    lineNumber: 271,
                                                     columnNumber: 25
                                                 }, this)
                                             }, booking.bid, false, {
                                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                lineNumber: 260,
+                                                lineNumber: 270,
                                                 columnNumber: 23
                                             }, this);
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                        lineNumber: 253,
+                                        lineNumber: 263,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                lineNumber: 251,
+                                lineNumber: 261,
                                 columnNumber: 15
                             }, this),
                             pastBookings.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -656,7 +663,7 @@ function MyBookingsPage() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                        lineNumber: 351,
+                                        lineNumber: 361,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -677,7 +684,7 @@ function MyBookingsPage() {
                                                                         children: booking.status === 'Cancelled' ? '✕ Annulée' : '✓ Terminé'
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                        lineNumber: 361,
+                                                                        lineNumber: 371,
                                                                         columnNumber: 31
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -688,18 +695,18 @@ function MyBookingsPage() {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                        lineNumber: 368,
+                                                                        lineNumber: 378,
                                                                         columnNumber: 31
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                lineNumber: 360,
+                                                                lineNumber: 370,
                                                                 columnNumber: 29
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                            lineNumber: 359,
+                                                            lineNumber: 369,
                                                             columnNumber: 27
                                                         }, this),
                                                         flight && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -716,7 +723,7 @@ function MyBookingsPage() {
                                                                                     children: flight.flno
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 378,
+                                                                                    lineNumber: 388,
                                                                                     columnNumber: 35
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -724,13 +731,13 @@ function MyBookingsPage() {
                                                                                     children: flight.departure_date
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 381,
+                                                                                    lineNumber: 391,
                                                                                     columnNumber: 35
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 377,
+                                                                            lineNumber: 387,
                                                                             columnNumber: 33
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -741,7 +748,7 @@ function MyBookingsPage() {
                                                                                     children: flight.origin
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 384,
+                                                                                    lineNumber: 394,
                                                                                     columnNumber: 35
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -749,7 +756,7 @@ function MyBookingsPage() {
                                                                                     children: "→"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 385,
+                                                                                    lineNumber: 395,
                                                                                     columnNumber: 35
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -757,19 +764,19 @@ function MyBookingsPage() {
                                                                                     children: flight.destination
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                                    lineNumber: 386,
+                                                                                    lineNumber: 396,
                                                                                     columnNumber: 35
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 383,
+                                                                            lineNumber: 393,
                                                                             columnNumber: 33
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 376,
+                                                                    lineNumber: 386,
                                                                     columnNumber: 31
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -784,7 +791,7 @@ function MyBookingsPage() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 391,
+                                                                            lineNumber: 401,
                                                                             columnNumber: 33
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -795,48 +802,48 @@ function MyBookingsPage() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                            lineNumber: 394,
+                                                                            lineNumber: 404,
                                                                             columnNumber: 33
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                                    lineNumber: 390,
+                                                                    lineNumber: 400,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                            lineNumber: 375,
+                                                            lineNumber: 385,
                                                             columnNumber: 29
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                    lineNumber: 358,
+                                                    lineNumber: 368,
                                                     columnNumber: 25
                                                 }, this)
                                             }, booking.bid, false, {
                                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                                lineNumber: 357,
+                                                lineNumber: 367,
                                                 columnNumber: 23
                                             }, this);
                                         })
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                        lineNumber: 352,
+                                        lineNumber: 362,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                                lineNumber: 350,
+                                lineNumber: 360,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                        lineNumber: 248,
+                        lineNumber: 258,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -847,18 +854,18 @@ function MyBookingsPage() {
                             children: "✈️ Nouvelle réservation"
                         }, void 0, false, {
                             fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                            lineNumber: 412,
+                            lineNumber: 422,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                        lineNumber: 411,
+                        lineNumber: 421,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                lineNumber: 232,
+                lineNumber: 242,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
@@ -869,23 +876,23 @@ function MyBookingsPage() {
                         children: "© 2024 SkyFlight Airlines - Projet NoSQL MongoDB"
                     }, void 0, false, {
                         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                        lineNumber: 424,
+                        lineNumber: 434,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                    lineNumber: 423,
+                    lineNumber: 433,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/client/my-bookings/page.tsx",
-                lineNumber: 422,
+                lineNumber: 432,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/client/my-bookings/page.tsx",
-        lineNumber: 207,
+        lineNumber: 217,
         columnNumber: 5
     }, this);
 }
