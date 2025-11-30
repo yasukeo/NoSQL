@@ -1,5 +1,6 @@
 {
   "/admin/aircraft/page": "app/admin/aircraft/page.js",
+  "/admin/bookings/page": "app/admin/bookings/page.js",
   "/admin/employees/page": "app/admin/employees/page.js",
   "/admin/flights/page": "app/admin/flights/page.js",
   "/admin/page": "app/admin/page.js",
@@ -11,6 +12,7 @@
   "/api/employees/route": "app/api/employees/route.js",
   "/api/flights/route": "app/api/flights/route.js",
   "/api/passengers/route": "app/api/passengers/route.js",
+  "/client/my-bookings/page": "app/client/my-bookings/page.js",
   "/client/page": "app/client/page.js",
   "/login/page": "app/login/page.js",
   "/page": "app/page.js",

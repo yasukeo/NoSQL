@@ -57,9 +57,20 @@ export async function PUT(request: NextRequest) {
   try {
     const { db } = await connectToDatabase();
     const data = await request.json();
-    const { _id, ...updateData } = data;
+    const { _id, bid, ...updateData } = data;
+    
+    // Permettre la mise à jour par _id OU par bid
+    let filter: any;
+    if (_id) {
+      filter = { _id: new ObjectId(_id) };
+    } else if (bid) {
+      filter = { bid: bid };
+    } else {
+      return NextResponse.json({ error: 'ID ou BID requis' }, { status: 400 });
+    }
+    
     const result = await db.collection('booking').updateOne(
-      { _id: new ObjectId(_id) },
+      filter,
       { $set: updateData }
     );
     return NextResponse.json({ message: 'Réservation modifiée', modifiedCount: result.modifiedCount });

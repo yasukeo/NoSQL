@@ -169,10 +169,25 @@ async function PUT(request) {
     try {
         const { db } = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$mongodb$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
         const data = await request.json();
-        const { _id, ...updateData } = data;
-        const result = await db.collection('booking').updateOne({
-            _id: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"](_id)
-        }, {
+        const { _id, bid, ...updateData } = data;
+        // Permettre la mise à jour par _id OU par bid
+        let filter;
+        if (_id) {
+            filter = {
+                _id: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"](_id)
+            };
+        } else if (bid) {
+            filter = {
+                bid: bid
+            };
+        } else {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'ID ou BID requis'
+            }, {
+                status: 400
+            });
+        }
+        const result = await db.collection('booking').updateOne(filter, {
             $set: updateData
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
