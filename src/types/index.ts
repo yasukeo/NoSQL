@@ -64,3 +64,13 @@ export interface Booking {
   status: 'Confirmed' | 'Pending' | 'Cancelled';
   price_paid: number;
 }
+
+export interface User {
+  _id?: string;
+  uid: string;
+  email: string;
+  password: string;
+  role: 'admin' | 'client';
+  name: string;
+  created_at: string;
+}

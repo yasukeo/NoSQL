@@ -166,9 +166,9 @@ export default function ClientBookingPage() {
       {/* Header */}
       <header className="bg-white/10 backdrop-blur-md border-b border-white/20">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white">✈️ SkyFlight Airlines</h1>
-          <a href="/" className="text-white/80 hover:text-white text-sm">
-            🔐 Accès Admin
+          <a href="/" className="text-2xl font-bold text-white">✈️ SkyFlight Airlines</a>
+          <a href="/login" className="text-white/80 hover:text-white text-sm">
+            🔐 Connexion
           </a>
         </div>
       </header>

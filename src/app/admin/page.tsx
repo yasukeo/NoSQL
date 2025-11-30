@@ -1,5 +1,6 @@
 import { connectToDatabase } from '@/lib/mongodb';
 import Link from 'next/link';
+import AdminNav from '@/components/AdminNav';
 
 // Page Admin - Dashboard avec statistiques et navigation CRUD
 export default async function AdminDashboard() {
@@ -38,27 +39,8 @@ export default async function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navigation Admin */}
-      <nav className="bg-purple-700 text-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="text-xl font-bold flex items-center space-x-2">
-                <span>✈️</span>
-                <span>SkyFlight Admin</span>
-              </Link>
-            </div>
-            <div className="flex space-x-2">
-              <Link href="/admin" className="bg-purple-800 px-3 py-2 rounded">Dashboard</Link>
-              <Link href="/admin/flights" className="hover:bg-purple-600 px-3 py-2 rounded">Vols</Link>
-              <Link href="/admin/aircraft" className="hover:bg-purple-600 px-3 py-2 rounded">Avions</Link>
-              <Link href="/admin/employees" className="hover:bg-purple-600 px-3 py-2 rounded">Employés</Link>
-              <Link href="/admin/passengers" className="hover:bg-purple-600 px-3 py-2 rounded">Passagers</Link>
-              <Link href="/admin/bookings" className="hover:bg-purple-600 px-3 py-2 rounded">Réservations</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Navigation Admin avec auth */}
+      <AdminNav />
 
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
